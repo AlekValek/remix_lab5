@@ -22,6 +22,7 @@ describe("Ballot", function () {
         console.log("Ballot deployed at:" + ballot.address);
         const [chairman, acc_1, acc_2] = await ethers.getSigners();
         await ballot.giveRightToVote(acc_1.address);
+        await ballot.giveRightToVote(acc_2.address);
         await ballot.connect(acc_1).delegate(acc_2.address);
         await ballot.connect(acc_2).vote(1);
         expect(await ballot.winningProposal()).to.equal(1);
